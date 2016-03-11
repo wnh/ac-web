@@ -52,7 +52,8 @@ module.exports = function (grunt) {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
     protractor: 'grunt-protractor-runner',
-    injector: 'grunt-asset-injector'
+    injector: 'grunt-asset-injector',
+    webpack: 'grunt-webpack'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -76,6 +77,21 @@ module.exports = function (grunt) {
           return src;
         }
       }
+    },
+    webpack: {
+        app: {
+          entry: './react/menu.js',
+          output: { path: 'dist/public/app',
+                    filename: 'bundle.js' },
+          module: {
+            loaders: [
+              { test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel',
+                query: { presets: ['react', 'es2015'] } } 
+            ]
+          }
+        }
     },
 
     // Project settings
@@ -743,7 +759,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'webpack'
   ]);
 
   grunt.registerTask('default', [
