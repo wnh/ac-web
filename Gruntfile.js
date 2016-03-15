@@ -81,7 +81,7 @@ module.exports = function (grunt) {
     webpack: {
         app: {
           entry: './react/menu.js',
-          output: { path: 'dist/public/app',
+          output: { path: 'client/webpack_build',
                     filename: 'bundle.js' },
           module: {
             loaders: [
@@ -166,6 +166,10 @@ module.exports = function (grunt) {
       },
       gruntfile: {
         files: ['Gruntfile.js']
+      },
+      webpack: {
+          files: 'react/**/*.js',
+          tasks: ['webpack', 'useminPrepare', 'usemin']
       },
       livereload: {
         files: [
@@ -756,11 +760,11 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'webpack',
     'cssmin',
     'uglify',
     'rev',
-    'usemin',
-    'webpack'
+    'usemin'
   ]);
 
   grunt.registerTask('default', [

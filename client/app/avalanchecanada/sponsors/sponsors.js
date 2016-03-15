@@ -109,7 +109,7 @@ angular.module('avalancheCanadaApp')
     $scope.partner         = partner;
     $scope.foundingSponsor = foundingSponsor;
     $scope.supplier        = supplier;
-    $scope.associate       = associate;
+    $scope.associate       = _.partition(associate, 4);
     //! once rendered call anchor scroll
     $timeout($anchorScroll, 0, false);
 });
